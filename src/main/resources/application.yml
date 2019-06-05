@@ -2,9 +2,9 @@ server:
   port:8089
 
 
-
+#使用多数据源配置，自定义配置我订的规则
 spring:
-  listTest: master,save
+  list: master,save
   datasource:
     master:
       driverClassCame: com.mysql.jdbc.Driver

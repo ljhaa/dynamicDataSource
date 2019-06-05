@@ -56,7 +56,7 @@ public class MyDataSourse {
 
     private Map<Object,Object> getdate(){
 
-        List<String> listTest = env.getProperty("spring.listTest", List.class);
+        List<String> listTest = env.getProperty("spring.list", List.class);
 
         Map<Object,Object> dataSourceMap = new HashMap<>();
 

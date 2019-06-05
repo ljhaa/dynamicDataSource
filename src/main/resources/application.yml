@@ -1,0 +1,21 @@
+server:
+  port:8089
+
+
+
+spring:
+  listTest: master,save
+  datasource:
+    master:
+      driverClassCame: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.19.7:3306/cbei_v2_test_cc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: cibeimysql
+    save:
+      driverClassCame: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.19.7:3306/cbei_v2_test_report?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: cibeimysql
+mybatis:
+  mapper-locations:  classpath*:com/example/boot/proliu/map/*.xml
+  type-aliases-package: com.example.boot.proliu.entity

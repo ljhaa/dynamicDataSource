@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boot.proliu.map.EstimateDishMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.boot.proliu.entity.EstimateDish">
+        <id column="id" property="id"/>
+        <result column="dish_name" property="dishName"/>
+        <result column="dish_code" property="dishCode"/>
+        <result column="estimate_time" property="estimateTime"/>
+        <result column="retail_code" property="retailCode"/>
+        <result column="retail_name" property="retailName"/>
+        <result column="dept_code" property="deptCode"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="lunch_takeaway_qty" property="lunchTakeawayQty"/>
+        <result column="lunch_here_qty" property="lunchHereQty"/>
+        <result column="dinner_takeaway_qty" property="dinnerTakeawayQty"/>
+        <result column="dinner_here_qty" property="dinnerHereQty"/>
+        <result column="lunch_total_qty" property="lunchTotalQty"/>
+        <result column="dinner_total_qty" property="dinnerTotalQty"/>
+        <result column="push_status" property="pushStatus"/>
+        <result column="remak" property="remak"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="updata_time" property="updataTime"/>
+        <result column="updata_by" property="updataBy"/>
+        <result column="split_status" property="splitStatus"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, dish_name AS dishName, dish_code AS dishCode, estimate_time AS estimateTime, retail_code AS retailCode, retail_name AS retailName, dept_code AS deptCode, dept_name AS deptName, lunch_takeaway_qty AS lunchTakeawayQty, lunch_here_qty AS lunchHereQty, dinner_takeaway_qty AS dinnerTakeawayQty, dinner_here_qty AS dinnerHereQty, lunch_total_qty AS lunchTotalQty, dinner_total_qty AS dinnerTotalQty, push_status AS pushStatus, remak, create_time AS createTime, create_by AS createBy, updata_time AS updataTime, updata_by AS updataBy, split_status AS splitStatus
+    </sql>
+
+    <select id="fundAll" resultType="com.example.boot.proliu.entity.EstimateDish">
+        select
+        <include refid="Base_Column_List"/>
+        from estimate_dish where DATE_FORMAT(estimate_time,'%Y-%m-%d') >= DATE_FORMAT(now(),'%Y-%m-%d')
+    </select>
+</mapper>

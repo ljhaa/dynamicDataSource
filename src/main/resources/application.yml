@@ -2,20 +2,23 @@ server:
   port:8089
 
 
-#使用多数据源配置，自定义配置我订的规则
-spring:
-  list: master,save
-  datasource:
-    master:
-      driverClassCame: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.19.7:3306/cbei_v2_test_cc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
-      username: root
-      password: cibeimysql
-    save:
-      driverClassCame: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.19.7:3306/cbei_v2_test_report?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
-      username: root
-      password: cibeimysql
-mybatis:
-  mapper-locations:  classpath*:com/example/boot/proliu/map/*.xml
-  type-aliases-package: com.example.boot.proliu.entity
+    #使用多数据源配置，自定义配置我订的规则,就是在项目中让程序读取到的配置的key值
+    spring:
+      #list 数据源名字的集合  名字自己订只需要在每个数据源上一级以该名字定义   第一个为默认数据源
+      list: master,save
+      datasource:
+        #数据源配置基本配置  其他的统一配置可以自己加 我比较懒  注：该级别的名字应该与上边list一一对应，不然会怎么样我也不知道 嘿嘿
+        master:
+          driverClassCame: com.mysql.jdbc.Driver
+          url: jdbc:mysql://192.168.19.7:3306/cbei_v2_test_cc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+          username: root
+          password: cibeimysql
+        save:
+          driverClassCame: com.mysql.jdbc.Driver
+          url: jdbc:mysql://192.168.19.7:3306/cbei_v2_test_report?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+          username: root
+          password: cibeimysql
+    #使用mybatis 需要的两个配置信息
+    mybatis:
+      mapper-locations:  classpath*:com/example/boot/proliu/map/*.xml
+      type-aliases-package: com.example.boot.proliu.entity

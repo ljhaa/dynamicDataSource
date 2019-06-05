@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 @Configuration
 public class MyDataSourse {
 
@@ -25,35 +27,43 @@ public class MyDataSourse {
 
 
 
+//
+//    @Bean("oneDateSource")
+//    @ConfigurationProperties("spring.datasource.master")
+//    public DataSource oneDateSource(){
+//
+//        DruidDataSource oneDateSource = DruidDataSourceBuilder.create().build();
+//       return oneDateSource;
+//    }
+//
+//
+//    @Bean("twoDateSource")
+//    @ConfigurationProperties("spring.datasource.save")
+//    public DataSource twoDateSource(){
+//        DruidDataSource twoDateSource = DruidDataSourceBuilder.create().build();
+//        return twoDateSource;
+//    }
 
-    @Bean("oneDateSource")
-    @ConfigurationProperties("spring.datasource.master")
-    public DataSource oneDateSource(){
 
-        DruidDataSource oneDateSource = DruidDataSourceBuilder.create().build();
-       return oneDateSource;
-    }
-
-
-    @Bean("twoDateSource")
-    @ConfigurationProperties("spring.datasource.save")
-    public DataSource twoDateSource(){
-        DruidDataSource twoDateSource = DruidDataSourceBuilder.create().build();
-        return twoDateSource;
-    }
-
-
+    /**
+     * 将获取的数据源配置注册到MyDynamicDataSource  或者说 AbstractRoutingDataSource 中
+     * @return
+     */
     @Bean
     @Primary
-//    public MyDynamicDataSource dataSource(@Qualifier("oneDateSource")DataSource oneDataSource, @Qualifier("twoDateSource")DataSource twoDataSource) {
     public MyDynamicDataSource dataSource() {
         Map<Object, Object> targetDataSources = getdate();
-//        targetDataSources.put(DataSourceKey.ONE, oneDataSource);
-//        targetDataSources.put(DataSourceKey.TWO, twoDataSource);
-        // 还有数据源,在targetDataSources中继续添加
         return new MyDynamicDataSource((DataSource)targetDataSources.get("default"), targetDataSources);
     }
 
+
+    /**
+     * 加载数据源时需要读取数据配配置到DruidDataSource类里 我这里用阿里的驱动
+     * 默认数据源我这使用default做为key
+     * 这里用到了Environment来读取配置
+     * 我和看的资料里就这有分歧  我认为这样更加简单清晰
+     * @return
+     */
     private Map<Object,Object> getdate(){
 
         List<String> listTest = env.getProperty("spring.list", List.class);
